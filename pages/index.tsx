@@ -2,8 +2,53 @@ import { ConnectButton, WalletButton } from "@rainbow-me/rainbowkit";
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import { useRouter } from "next/router";
+import { Query, useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Home: NextPage = () => {
+  const router = useRouter();
+  const [info, setInfo] = useState([]);
+  const url = "https://api.coinlore.net/api/tickers/?start=0&limit=10";
+
+  // const getData = async () => {
+  //   const info = fetch(url).then(res => {
+  //     res.json();
+  //   });
+
+  //   console.log(info);
+  //   return info;
+  // };
+
+  const fetchCryptoData = async () => {
+    try {
+      const response = await axios.get(
+        "https://api.coinlore.net/api/tickers/?start=0&limit=10"
+      );
+      return response.data.data; // Assuming the API response has a "data" property
+    } catch (error) {
+      throw new Error("Error fetching crypto data");
+    }
+  };
+
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["cryptos"],
+    queryFn: fetchCryptoData,
+  });
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
+  const goToDetails = () => {
+    router.push("/coin-details");
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -18,6 +63,17 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <ConnectButton label="Connect Wallets" />
         <WalletButton wallet="metamask" />
+        <button type="button" onClick={goToDetails}>
+          {" "}
+          go to details
+        </button>
+        <ul>
+          {data.map(crypto => (
+            <li key={crypto.id}>
+              {crypto.name} ({crypto.symbol}) - Rank {crypto.rank}
+            </li>
+          ))}
+        </ul>
       </main>
 
       {/* <footer className={styles.footer}>
