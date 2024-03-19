@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export  const getCryptoList = async () => {
+export const getCryptoList = async () => {
     try {
       const response = await axios.get(
         "https://api.coinlore.net/api/tickers/?start=0&limit=10"
