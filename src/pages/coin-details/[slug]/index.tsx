@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import React from "react";
-import { getCryptoDetails } from "../../services/getDetails";
+import { getCryptoDetails } from "../../../services/getDetails";
 import Head from "next/head";
-import Header from "../header";
+import Header from "../../../components/header";
 import Image from "next/image";
 
-const CoinDetails = () => {
+const Index = () => {
   const router = useRouter();
   const coinId = router.query.slug;
 
@@ -35,7 +35,6 @@ const CoinDetails = () => {
           name="description"
         />
       </Head>
-      <Header />
 
       <h1>Detail Page for {coinId} </h1>
       <button type="button" onClick={backToMain}>
@@ -52,4 +51,4 @@ const CoinDetails = () => {
   );
 };
 
-export default CoinDetails;
+export default Index;

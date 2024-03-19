@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "../../styles/Home.module.css";
 import { ConnectButton, WalletButton } from "@rainbow-me/rainbowkit";
 
 const Header = () => {

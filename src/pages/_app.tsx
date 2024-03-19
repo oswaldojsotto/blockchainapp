@@ -13,6 +13,7 @@ import {
   zora,
 } from "wagmi/chains";
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import Header from "../components/header";
 
 const config = getDefaultConfig({
   appName: "Crypto",
@@ -39,6 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           modalSize="compact"
           initialChain={mainnet}
           locale="en-US">
+          <Header />
           <Component {...pageProps} />
         </RainbowKitProvider>
       </QueryClientProvider>
