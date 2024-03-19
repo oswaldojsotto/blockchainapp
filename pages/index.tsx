@@ -3,38 +3,15 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
-import { Query, useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import { getCryptoInfo } from "../Services/getCoins";
 
 const Home: NextPage = () => {
   const router = useRouter();
-  const [info, setInfo] = useState([]);
-  const url = "https://api.coinlore.net/api/tickers/?start=0&limit=10";
-
-  // const getData = async () => {
-  //   const info = fetch(url).then(res => {
-  //     res.json();
-  //   });
-
-  //   console.log(info);
-  //   return info;
-  // };
-
-  const fetchCryptoData = async () => {
-    try {
-      const response = await axios.get(
-        "https://api.coinlore.net/api/tickers/?start=0&limit=10"
-      );
-      return response.data.data; // Assuming the API response has a "data" property
-    } catch (error) {
-      throw new Error("Error fetching crypto data");
-    }
-  };
 
   const { data, error, isLoading } = useQuery({
     queryKey: ["cryptos"],
-    queryFn: fetchCryptoData,
+    queryFn: getCryptoInfo,
   });
 
   if (isLoading) {
@@ -68,19 +45,14 @@ const Home: NextPage = () => {
           go to details
         </button>
         <ul>
-          {data.map(crypto => (
-            <li key={crypto.id}>
-              {crypto.name} ({crypto.symbol}) - Rank {crypto.rank}
-            </li>
+          {data.map((crypto: { id: number; name: string; symbol: string }) => (
+            <div key={crypto.id}>
+              <div onClick={() => console.log(crypto.id)}>{crypto.name}</div>
+              <p>({crypto.symbol})</p>
+            </div>
           ))}
         </ul>
       </main>
-
-      {/* <footer className={styles.footer}>
-        <a href="https://rainbow.me" rel="noopener noreferrer" target="_blank">
-          Made with ❤️ by your frens at 🌈
-        </a>
-      </footer> */}
     </div>
   );
 };
