@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import React from "react";
-import { getCryptoDetails } from "../../Services/getDetails";
+import { getCryptoDetails } from "../../services/getDetails";
 import Head from "next/head";
 import Header from "../header";
+import Image from "next/image";
 
-const Index = () => {
+const CoinDetails = () => {
   const router = useRouter();
   const coinId = router.query.slug;
 
@@ -17,6 +18,12 @@ const Index = () => {
   const backToMain = () => {
     router.push("/");
   };
+  const coinName = () => {
+    if (!isFetching) {
+      return data[0]?.name;
+    }
+  };
+  const imageSrc = `https://www.coinlore.com/img/50x50/ethereum.png`;
 
   return (
     <div>
@@ -29,18 +36,20 @@ const Index = () => {
         />
       </Head>
       <Header />
+
       <h1>Detail Page for {coinId} </h1>
       <button type="button" onClick={backToMain}>
         {" "}
         Back to main
       </button>
+      <Image width={50} height={50} src={imageSrc} alt="crypto-image" />
       {isFetching ? (
         <p className="my-4">loading</p>
       ) : (
-        <div className="my-4">{data[0]?.name}</div>
+        <div className="my-4">{coinName()}</div>
       )}
     </div>
   );
 };
 
-export default Index;
+export default CoinDetails;
