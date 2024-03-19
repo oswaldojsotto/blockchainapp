@@ -1,9 +1,13 @@
 import axios from "axios";
 
-export  const getCryptoList = async () => {
+interface CryptoDetailsProps  { 
+    cryptoId: number;
+}
+
+export  const getCryptoDetails = async ({cryptoId}: CryptoDetailsProps) => {
     try {
       const response = await axios.get(
-        "https://api.coinlore.net/api/tickers/?start=0&limit=10"
+        `https://api.coinlore.net/api/ticker/?id=${cryptoId}`
       );
       return response.data.data; 
     } catch (error) {
