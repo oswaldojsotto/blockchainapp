@@ -38,6 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={client}>
         <RainbowKitProvider
           modalSize="compact"
+          coolMode
           initialChain={mainnet}
           locale="en-US">
           <Header />

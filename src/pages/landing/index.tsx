@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCryptoList } from "../../services/get-crypto-list";
 import Head from "next/head";
 import CurrencyList from "../../components/currency-list";
+import Profile from "../../components/profile";
 
 const Landing = () => {
   const router = useRouter();
@@ -27,6 +28,7 @@ const Landing = () => {
       </Head>
 
       <div className="my-12">
+        <Profile />
         <CurrencyList data={data} />
       </div>
     </div>
