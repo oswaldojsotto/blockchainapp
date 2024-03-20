@@ -7,6 +7,8 @@ import Head from "next/head";
 import Image from "next/image";
 import { getMarketPrices } from "../../../services/get-market-prices";
 import CryptoImage from "../../../components/crypto-image";
+import Chart from "../components/chart";
+import { formatMarketData } from "../../../hooks/format-market-data";
 
 const Index = () => {
   const router = useRouter();
@@ -47,6 +49,12 @@ const Index = () => {
     router.push("/");
   };
 
+  const chartData = () => {
+    if (marketData) {
+      return formatMarketData(marketData);
+    }
+  };
+
   if (detailError || marketError) {
     return (
       <div>
@@ -81,6 +89,7 @@ const Index = () => {
         {" "}
         Back to main
       </button>
+      {/* {marketData && <Chart data={chartData()} />} */}
     </div>
   );
 };
