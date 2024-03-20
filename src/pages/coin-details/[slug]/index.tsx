@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import React from "react";
-import { getCryptoDetails } from "../../../services/getDetails";
+import { getCryptoDetails } from "../../../services/get-details";
 import Head from "next/head";
-import Header from "../../../components/header";
 import Image from "next/image";
 
 const Index = () => {

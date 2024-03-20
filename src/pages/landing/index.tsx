@@ -19,40 +19,15 @@ const Landing = () => {
     return <p>Error: {error.message}</p>;
   }
 
-  const goToDetails = (coinId: number) => {
-    router.push({
-      pathname: `/coin-details/${coinId}`,
-      // query: { coinId },
-    });
-  };
   return (
-    <div>
+    <div className="mx-8">
       <Head>
         <title>Blockchain App</title>
         <meta content="Created by Oswaldo" name="description" />
       </Head>
-      <ul>
-        {data.map(
-          (crypto: {
-            id: number;
-            name: string;
-            symbol: string;
-            price_usd: number;
-          }) => (
-            <div
-              key={crypto.id}
-              className="flex gap-2 justify-between w-[26rem]  cursor-pointer"
-              onClick={() => goToDetails(crypto.id)}>
-              <div className="min-w-[10rem]">{crypto.name}</div>
-              <p>({crypto.symbol})</p>
-              <p>Price in USD: {crypto.price_usd}</p>
-            </div>
-          )
-        )}
-      </ul>
 
       <div className="my-12">
-        <CurrencyList />
+        <CurrencyList data={data} />
       </div>
     </div>
   );

@@ -1,9 +1,7 @@
 import React from "react";
 import { useTable } from "react-table";
 
-const Table = ({ tableData, columns }: TableProps) => {
-  const data = React.useMemo(() => tableData, [tableData]);
-
+const Table = ({ data, columns }: TableProps) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
 
@@ -17,7 +15,7 @@ const Table = ({ tableData, columns }: TableProps) => {
                 <div
                   className={`flex ${
                     j === 0 ? "justify-start" : "justify-end"
-                  }`}>
+                  } ${j === 5 && "justify-center"}`}>
                   {column.render("Header")}
                 </div>
               </th>
@@ -29,13 +27,16 @@ const Table = ({ tableData, columns }: TableProps) => {
         {rows.map((row, i) => {
           prepareRow(row);
           return (
-            <tr {...row.getRowProps()} key={i}>
+            <tr
+              {...row.getRowProps()}
+              key={i}
+              className="rounded hover:bg-[#e6e6e6] transition-all">
               {row.cells.map((cell, j) => (
                 <td {...cell.getCellProps()} key={j}>
                   <div
-                    className={`flex ${
+                    className={`  flex ${
                       j === 0 ? "justify-start" : "justify-end"
-                    }`}>
+                    } ${j === 5 && "justify-center"}`}>
                     {cell.render("Cell")}
                   </div>
                 </td>

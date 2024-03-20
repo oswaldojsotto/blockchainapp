@@ -1,14 +1,18 @@
-interface TableProps {
-    tableData: readonly Column<
-      Column<{
-        id: number;
-        name: string;
-        percent_change_24h: string;
-        volume24: number;
-        market_cap_usd: string;
-        rank: number;
-      }>
-    >[];
+type CurrencyListProps = {
+  data: {}[]
+}
 
-    columns: { Header: string; accessor: string; }[]
-  }
+type TableProps = {
+  data: {}[]
+  columns: []
+}
+
+type RowProps = {
+  nameid: string;
+  symbol: string;
+  name: string;
+  id: string;
+  percent_change_24h: string;
+  volume24: number;
+  market_cap_usd: number;
+}
