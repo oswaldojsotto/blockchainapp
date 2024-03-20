@@ -5,6 +5,7 @@ import CryptoImage from "./crypto-image";
 import { usdFormatter } from "../hooks/usd-formatter";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Collapsible from "./collapsible";
 
 const CurrencyList = ({ data }: CurrencyListProps) => {
   const tableData = React.useMemo(() => data, [data]);
@@ -13,11 +14,8 @@ const CurrencyList = ({ data }: CurrencyListProps) => {
   const goToDetails = (coinId: number) => {
     router.push({
       pathname: `/coin-details/${coinId}`,
-      // query: { coinId },
     });
   };
-
-  const selectedTabs = [0, 1, 2, 3, 4, 5];
 
   const columns = useMemo(
     () => [
@@ -84,7 +82,7 @@ const CurrencyList = ({ data }: CurrencyListProps) => {
               className={`font-semibold ${
                 value >= 0 ? "text-emerald-600" : `text-red-400`
               }`}>
-              {value} %
+              {value}%
             </div>
           );
         },
@@ -153,8 +151,11 @@ const CurrencyList = ({ data }: CurrencyListProps) => {
   );
 
   return (
-    <div>
-      <Table data={tableData} columns={columns} />
+    <div className="w-full flex justify-center ">
+      <div className="flex flex-col w-full lg:w-[90%] xl:w-[75%] ">
+        <Collapsible />
+        <Table data={tableData} columns={columns} />
+      </div>
     </div>
   );
 };

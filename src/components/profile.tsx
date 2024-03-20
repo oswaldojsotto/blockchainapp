@@ -14,9 +14,9 @@ const Profile = () => {
     console.log(balance);
   }, [balance]);
 
-  if (status === "pending") return <Hero />;
   if (status === "error")
     return <div>Error fetching ENS name: {error.message}</div>;
+  if (status === "pending") return <Hero />;
   return (
     <div>
       <HeroLogged />

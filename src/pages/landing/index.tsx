@@ -27,7 +27,7 @@ const Landing = () => {
         <meta content="Created by Oswaldo" name="description" />
       </Head>
 
-      <div className="my-12">
+      <div className="my-12 w-full flex flex-col justify-center">
         <Profile />
         <CurrencyList data={data} />
       </div>

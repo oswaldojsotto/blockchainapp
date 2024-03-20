@@ -82,13 +82,13 @@ const Index = () => {
 
           <h1>Detail Page for {detailData[0]?.nameid} </h1>
           <CryptoImage coinName={detailData[0]?.nameid} size="lg" />
+          <button type="button" onClick={backToMain}>
+            {" "}
+            Back to main
+          </button>
         </div>
       )}
 
-      <button type="button" onClick={backToMain}>
-        {" "}
-        Back to main
-      </button>
       {/* {marketData && <Chart data={chartData()} />} */}
     </div>
   );
