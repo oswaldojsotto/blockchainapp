@@ -24,15 +24,15 @@ const Collapsible = ({ title, description, brief }: CollapsibleProps) => {
             </div>
           </AccordionHeader>
           <AccordionTrigger className="flex justify-start gap-1 text-[13px] text-neutral-600">
-            <span className="font-normal text-neutral-600">
+            <span className="font-semibold text-neutral-600">
               {brief}{" "}
-              <span className="text-neutral-600 text-[13px] hover:font-semibold">
+              <span className="text-neutral-600 text-[13px] font-semibold">
                 {" "}
                 Show more...
               </span>
             </span>
           </AccordionTrigger>
-          <AccordionContent className="text-neutral-600 text-[13px]">
+          <AccordionContent className="text-neutral-600 text-[12px]">
             {description}
           </AccordionContent>
         </AccordionItem>

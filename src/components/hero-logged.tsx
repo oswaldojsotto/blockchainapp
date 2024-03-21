@@ -70,7 +70,7 @@ const HeroLogged = ({ balance, address }: HeroLoggedProps) => {
               alt="show-balance-icon"
               src={`/icons/secret.svg`}
             />
-            <p className="font-semibold text-[12px]  text-neutral-500">
+            <p className="font-semibold text-[12px] mt-1  text-neutral-500">
               Your assets are hidden, tap the eye icon to show your assets.
             </p>
           </>
