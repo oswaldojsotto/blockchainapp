@@ -9,6 +9,7 @@ import { getMarketPrices } from "../../../services/get-market-prices";
 import CryptoImage from "../../../components/crypto-image";
 import Chart from "../components/chart";
 import { formatMarketData } from "../../../hooks/format-market-data";
+import { filterAverage } from "../../../hooks/filter-average";
 
 const Index = () => {
   const router = useRouter();
@@ -39,6 +40,8 @@ const Index = () => {
     enabled: hasCoinId,
   });
 
+  if (detailData) console.log();
+
   useEffect(() => {
     if (coinId) {
       setHasCoinId(true);
@@ -54,6 +57,15 @@ const Index = () => {
       return formatMarketData(marketData);
     }
   };
+
+  // useEffect(() => {
+  //   const data = marketData;
+
+  // }, [marketData]);
+
+  if (marketData && detailData) {
+    console.log(filterAverage(detailData[0].price_usd, marketData));
+  }
 
   if (detailError || marketError) {
     return (
