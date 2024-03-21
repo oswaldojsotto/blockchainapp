@@ -84,12 +84,11 @@ export const WalletConnectButton = () => {
                     onClick={openAccountModal}
                     type="button"
                     variant="logout">
-                    {account.displayName}
-                    {" | "}
+                    {/* {account.displayName} */}
                     {/* {account.displayBalance
                       ? ` (${account.displayBalance})`
                       : ""} */}
-                    Sign Out
+                    Disconnect Wallet
                   </Button>
                 </div>
               );

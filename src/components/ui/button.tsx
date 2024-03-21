@@ -20,8 +20,8 @@ const buttonVariants = cva(
           "hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
         link: "text-neutral-900 underline-offset-4 hover:underline dark:text-neutral-50",
         custom: "bg-[#F0B90B] text-neutral-700 hover:bg-[#FCD949] ",
-        crypto: "bg-sky-200 text-neutral-700 hover:bg-blue-200 ",
-        logout: "bg-rose-300 text-neutral-700 hover:bg-rose-200 ",
+        crypto: "bg-neutral-600 text-neutral-200 hover:bg-neutral-500 ",
+        logout: "bg-red-400 text-neutral-100 hover:bg-red-300 ",
       },
       size: {
         default: "h-10 px-4 py-2",

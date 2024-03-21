@@ -2,9 +2,12 @@ import { useAccount, useBalance } from "wagmi";
 import Hero from "./hero";
 import HeroLogged from "./hero-logged";
 import Collapsible from "./collapsible";
+import { useEffect, useState } from "react";
+import { toast } from "../lib/use-toast";
 
 const Profile = () => {
   const { address } = useAccount();
+  const [shouldToast, setShouldToast] = useState(false);
 
   const {
     data: balance,
@@ -15,10 +18,30 @@ const Profile = () => {
     address: address,
   });
 
-  if (status === "error")
-    return <div>Error fetching ENS name: {error.message}</div>;
+  useEffect(() => {
+    if (status === "success" && shouldToast) {
+      toast({
+        variant: "success",
+        description: "Successfully connected to your wallet ✅",
+      });
 
-  if (isFetching) return null;
+      setShouldToast(false);
+    }
+
+    if (status === "pending") {
+      setShouldToast(true);
+    }
+
+    if (status === "error") {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+      });
+    }
+  }, [status]);
+
+  // if (isFetching) return null;
 
   return (
     <div>

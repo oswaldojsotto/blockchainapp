@@ -14,6 +14,7 @@ import {
 } from "wagmi/chains";
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import Header from "../components/header";
+import { Toaster } from "../components/ui/toaster";
 
 const config = getDefaultConfig({
   appName: "Crypto",
@@ -41,6 +42,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           coolMode
           initialChain={mainnet}
           locale="en-US">
+          <Toaster />
           <Header />
           <Component {...pageProps} />
         </RainbowKitProvider>
