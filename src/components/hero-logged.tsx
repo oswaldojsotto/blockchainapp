@@ -14,7 +14,7 @@ const HeroLogged = ({ balance, address }: HeroLoggedProps) => {
         <p className="font-semibold flex">Address: {address} </p>
         <div onClick={() => copyToClipboard(JSON.stringify(address))}>
           <Image
-            className="mt-0.5 w-5 max-w-5 h-5 max-h-5 cursor-pointer active:w-[19px] active:h-[19px] transition-all fixed"
+            className="mt-0.5 w-5 max-w-5 h-5 max-h-5 cursor-pointer active:w-[19px] active:h-[19px] transition-all "
             width={16}
             height={16}
             alt="show-balance-icon"
