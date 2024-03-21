@@ -7,3 +7,5 @@ tailwind css support.
 
 -The API used in this App are provided by
 https://www.coinlore.com/cryptocurrency-data-api
+
+-Installed Shadcn for import some additional reusable components

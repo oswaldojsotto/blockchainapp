@@ -5,7 +5,6 @@ import CryptoImage from "./crypto-image";
 import { usdFormatter } from "../hooks/usd-formatter";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import Collapsible from "./collapsible";
 
 const CurrencyList = ({ data }: CurrencyListProps) => {
   const tableData = React.useMemo(() => data, [data]);
@@ -23,7 +22,7 @@ const CurrencyList = ({ data }: CurrencyListProps) => {
         id: "name",
         Header: () => {
           return (
-            <div className={`sm:text-[12px] text-[10px] text-neutral-400`}>
+            <div className={`ml-2 sm:text-[12px] text-[10px] text-neutral-400`}>
               Name
             </div>
           );
@@ -31,11 +30,11 @@ const CurrencyList = ({ data }: CurrencyListProps) => {
         accessor: (row: RowProps) => {
           return (
             <div
-              className="flex gap-2 my-2 text-sm cursor-pointer"
+              className="flex gap-2 my-2 ml-2 text-sm cursor-pointer "
               onClick={() => goToDetails(Number(row.id))}>
               <CryptoImage coinName={row.nameid} size="sm" />
-              <div className="flex flex-col sm:flex-row mt-2 gap-1 text-sm">
-                <span className="flex font-bold text-sm text-neutral-700">
+              <div className="flex flex-col gap-1 mt-2 text-sm sm:flex-row">
+                <span className="flex text-sm font-bold text-neutral-700">
                   {row.symbol}
                 </span>
                 <span className="flex text-sm text-neutral-400">
@@ -59,7 +58,7 @@ const CurrencyList = ({ data }: CurrencyListProps) => {
 
         accessor: (row: { price_usd: string }) => {
           return (
-            <div className="hidden text-neutral-600 font-semibold sm:flex ">
+            <div className="hidden font-semibold text-neutral-600 sm:flex ">
               {usdFormatter(Number(row.price_usd))}
             </div>
           );
@@ -151,9 +150,8 @@ const CurrencyList = ({ data }: CurrencyListProps) => {
   );
 
   return (
-    <div className="w-full flex justify-center ">
+    <div className="flex justify-center w-full ">
       <div className="flex flex-col w-full lg:w-[90%] xl:w-[75%] ">
-        <Collapsible />
         <Table data={tableData} columns={columns} />
       </div>
     </div>

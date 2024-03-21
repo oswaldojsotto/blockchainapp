@@ -1,17 +1,18 @@
 import React from "react";
-import { ConnectButton, WalletButton } from "@rainbow-me/rainbowkit";
+import { WalletConnectButton } from "./wallet-connect-button";
 
 const Header = () => {
   return (
-    <main className="flex  fixed top-0 justify-between gap-4 -200 w-full bg-white shadow-md">
-      <div className=" flex items-center mx-8">
+    <main className="fixed top-0 flex justify-between w-full gap-4 bg-white shadow-md -200">
+      <div className="flex items-center mx-8 ">
         <h1 className="font-bold text-2xl text-[#F0B90B]">
-          BE<span className="text-neutral-800">-</span>TRADE
+          BE<span className="text-neutral-700">-</span>TRADE
         </h1>
       </div>
-      <div className="p-4 flex gap-2  justify-between">
-        <ConnectButton label="Other Wallets..." />
-        <WalletButton wallet="metamask" />
+      <div className="flex justify-between gap-2 p-4">
+        {/* <ConnectButton label="Other Wallets..." /> */}
+        <WalletConnectButton />
+        {/* <WalletButton wallet="metamask" /> */}
       </div>
     </main>
   );
