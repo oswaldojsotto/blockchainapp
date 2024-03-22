@@ -1,5 +1,5 @@
-import { sortArrayByTime } from "./sort-by-time";
-import { timestampFormatter } from "./timestamp-formatter";
+import { sortArrayByTime } from "@/src/hooks/sort-by-time";
+import { timestampFormatter } from "@/src/hooks/timestamp-formatter";
 
 //this function organizes the data that will be send to the graph
 //because the source is inconsistent

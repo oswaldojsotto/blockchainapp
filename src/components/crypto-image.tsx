@@ -9,12 +9,12 @@ const CryptoImage = ({ coinName, size = "sm" }: CryptoImageProps) => {
   return (
     <Image
       className={`${
-        size === "sm" ? "w-[32px] h-[32px]" : "w-[128px] h-[128px]"
+        size === "sm" ? "w-[32px] h-[32px]" : "w-[64px] h-[64px]"
       } mt-3 sm:mt-0`}
       src={size === "sm" ? smallImage : bigImage}
       alt="crypto-image"
-      width={size === "sm" ? 32 : 250}
-      height={size === "sm" ? 32 : 250}
+      width={size === "sm" ? 32 : 64}
+      height={size === "sm" ? 32 : 64}
     />
   );
 };

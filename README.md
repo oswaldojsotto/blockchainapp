@@ -9,3 +9,7 @@ tailwind css support.
 https://www.coinlore.com/cryptocurrency-data-api
 
 -Installed Shadcn for import some additional reusable components
+
+-Installed the react-google-charts to handle the charts
+
+-Adjustments on the Details Page

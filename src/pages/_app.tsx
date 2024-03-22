@@ -3,6 +3,9 @@ import "@rainbow-me/rainbowkit/styles.css";
 import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
+import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import Header from "@/src/components/header";
+import { Toaster } from "@/src/components/ui/toaster";
 import {
   arbitrum,
   base,
@@ -12,9 +15,6 @@ import {
   sepolia,
   zora,
 } from "wagmi/chains";
-import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import Header from "../components/header";
-import { Toaster } from "../components/ui/toaster";
 
 const config = getDefaultConfig({
   appName: "Crypto",

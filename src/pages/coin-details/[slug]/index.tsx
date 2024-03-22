@@ -1,20 +1,21 @@
 "use client";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { getCryptoDetails } from "../../../services/get-details";
+import { transformDataToArray } from "@/src/hooks/transform-chart-data";
+import { getCryptoDetails } from "@/src/services/get-details";
+import { getMarketPrices } from "@/src/services/get-market-prices";
+import { filterAverage } from "@/src/hooks/filter-average";
 import Head from "next/head";
-import Image from "next/image";
-import { getMarketPrices } from "../../../services/get-market-prices";
-import CryptoImage from "../../../components/crypto-image";
-import { formatMarketData } from "../../../hooks/format-market-data";
-import { filterAverage } from "../../../hooks/filter-average";
-import Chart from "../components/chart";
+import CryptoImage from "@/src/components/crypto-image";
+import LineChart from "@/src/components/line-chart";
+import { usdFormatter } from "@/src/hooks/usd-formatter";
+import StatisticsContainer from "@/src/components/statistics-container";
 
 const Index = () => {
   const router = useRouter();
-  const [hasCoinId, setHasCoinId] = useState(false);
-  const [chartData, setChartData] = useState<SortProps[]>();
+  const [hasCoinId, setHasCoinId] = useState<boolean>(false);
+  const [chartData, setChartData] = useState<string[][]>();
   const coinId = router.query.slug;
 
   const {
@@ -41,23 +42,19 @@ const Index = () => {
     enabled: hasCoinId,
   });
 
-  if (detailData) console.log();
-
   useEffect(() => {
     if (coinId) {
       setHasCoinId(true);
     }
   }, [coinId]);
 
-  const backToMain = () => {
-    router.push("/");
-  };
-
   useEffect(() => {
     if (marketData && detailData) {
-      setChartData(filterAverage(detailData[0].price_usd, marketData));
+      const data = filterAverage(detailData[0].price_usd, marketData);
+      const transformedData = transformDataToArray(data);
+      setChartData(transformedData);
     }
-  }, [detailData, marketData]);
+  }, [marketData, detailData]);
 
   if (detailError || marketError) {
     return (
@@ -75,29 +72,49 @@ const Index = () => {
   }
 
   return (
-    <div>
+    <div className="h-[100vh] pt-[72px] mx-8">
       {!detailIsFetching && !marketIsFetching && hasCoinId && (
         <div>
           <Head>
             {!detailIsFetching && <title>{detailData[0]?.name}</title>}
-
-            <meta content="" name="" />
           </Head>
 
-          <h1>Detail Page for {detailData[0]?.nameid} </h1>
-          <CryptoImage coinName={detailData[0]?.nameid} size="lg" />
-          <button type="button" onClick={backToMain}>
-            {" "}
-            Back to main
-          </button>
+          <section className="flex gap-3 my-4 flex-col">
+            <div className="flex">
+              <CryptoImage coinName={detailData[0]?.nameid} size="lg" />
+              <p className="flex items-center text-[32px] font-bold text-neutral-800 mx-2">
+                {detailData[0]?.name} Price
+                <span className="mx-2 pt-2 text-[20px] text-neutral-500 font-semibold">
+                  ({detailData[0]?.symbol})
+                </span>
+              </p>
+            </div>
+            <div className="flex">
+              <h1 className="text-3xl font-bold text-neutral-800">
+                {usdFormatter(detailData[0]?.price_usd)}
+                <span
+                  className={`mx-2 ${
+                    detailData[0].percent_change_24h > 0
+                      ? `text-emerald-400 text-xl`
+                      : `text-red-400 text-xl`
+                  }`}>
+                  {detailData[0]?.percent_change_24h}%
+                </span>
+              </h1>
+              <span className="text-neutral-700 flex items-center mt-3 font-semibold text-[13px] ">
+                1D
+              </span>
+            </div>
+          </section>
         </div>
       )}
 
-      {/* {marketData && detailData && coinId && (
-        <div className="max-h-[10rem]">
-          <Chart data={chartData} />
-        </div>
-      )} */}
+      {chartData && detailData && (
+        <section className="flex flex-col">
+          <LineChart data={chartData} />
+          <StatisticsContainer data={detailData[0]} />
+        </section>
+      )}
     </div>
   );
 };
