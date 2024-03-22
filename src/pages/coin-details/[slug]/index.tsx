@@ -7,13 +7,14 @@ import Head from "next/head";
 import Image from "next/image";
 import { getMarketPrices } from "../../../services/get-market-prices";
 import CryptoImage from "../../../components/crypto-image";
-import Chart from "../components/chart";
 import { formatMarketData } from "../../../hooks/format-market-data";
 import { filterAverage } from "../../../hooks/filter-average";
+import Chart from "../components/chart";
 
 const Index = () => {
   const router = useRouter();
   const [hasCoinId, setHasCoinId] = useState(false);
+  const [chartData, setChartData] = useState<SortProps[]>();
   const coinId = router.query.slug;
 
   const {
@@ -52,20 +53,11 @@ const Index = () => {
     router.push("/");
   };
 
-  const chartData = () => {
-    if (marketData) {
-      return formatMarketData(marketData);
+  useEffect(() => {
+    if (marketData && detailData) {
+      setChartData(filterAverage(detailData[0].price_usd, marketData));
     }
-  };
-
-  // useEffect(() => {
-  //   const data = marketData;
-
-  // }, [marketData]);
-
-  if (marketData && detailData) {
-    console.log(filterAverage(detailData[0].price_usd, marketData));
-  }
+  }, [detailData, marketData]);
 
   if (detailError || marketError) {
     return (
@@ -101,7 +93,11 @@ const Index = () => {
         </div>
       )}
 
-      {/* {marketData && <Chart data={chartData()} />} */}
+      {/* {marketData && detailData && coinId && (
+        <div className="max-h-[10rem]">
+          <Chart data={chartData} />
+        </div>
+      )} */}
     </div>
   );
 };
