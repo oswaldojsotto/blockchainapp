@@ -11,6 +11,7 @@ import CryptoImage from "@/src/components/crypto-image";
 import LineChart from "@/src/components/line-chart";
 import { usdFormatter } from "@/src/hooks/usd-formatter";
 import StatisticsContainer from "@/src/components/statistics-container";
+import TradeCalculator from "@/src/components/trade-calculator";
 
 const Index = () => {
   const router = useRouter();
@@ -74,38 +75,47 @@ const Index = () => {
   return (
     <div className="h-[100vh] pt-[72px] mx-8">
       {!detailIsFetching && !marketIsFetching && hasCoinId && (
-        <div>
-          <Head>
-            {!detailIsFetching && <title>{detailData[0]?.name}</title>}
-          </Head>
+        <div className="flex flex-col md:flex-row w-full md:justify-between">
+          <div>
+            <Head>
+              {!detailIsFetching && <title>{detailData[0]?.name}</title>}
+            </Head>
 
-          <section className="flex gap-3 my-4 flex-col">
-            <div className="flex">
-              <CryptoImage coinName={detailData[0]?.nameid} size="lg" />
-              <p className="flex items-center text-[32px] font-bold text-neutral-800 mx-2">
-                {detailData[0]?.name} Price
-                <span className="mx-2 pt-2 text-[20px] text-neutral-500 font-semibold">
-                  ({detailData[0]?.symbol})
+            <section className="flex gap-3 my-4 flex-col">
+              <div className="flex">
+                <CryptoImage coinName={detailData[0]?.nameid} size="lg" />
+                <p className="flex items-center text-[32px] font-bold text-neutral-800 mx-2">
+                  {detailData[0]?.name} Price
+                  <span className="mx-2 pt-2 text-[20px] text-neutral-500 font-semibold">
+                    ({detailData[0]?.symbol})
+                  </span>
+                </p>
+              </div>
+              <div className="flex">
+                <h1 className="text-3xl font-bold text-neutral-800">
+                  {usdFormatter(detailData[0]?.price_usd)}
+                  <span
+                    className={`mx-2 ${
+                      detailData[0].percent_change_24h > 0
+                        ? `text-emerald-400 text-xl`
+                        : `text-red-400 text-xl`
+                    }`}>
+                    {detailData[0]?.percent_change_24h}%
+                  </span>
+                </h1>
+                <span className="text-neutral-700 flex items-center mt-3 font-semibold text-[13px] ">
+                  1D
                 </span>
-              </p>
-            </div>
-            <div className="flex">
-              <h1 className="text-3xl font-bold text-neutral-800">
-                {usdFormatter(detailData[0]?.price_usd)}
-                <span
-                  className={`mx-2 ${
-                    detailData[0].percent_change_24h > 0
-                      ? `text-emerald-400 text-xl`
-                      : `text-red-400 text-xl`
-                  }`}>
-                  {detailData[0]?.percent_change_24h}%
-                </span>
-              </h1>
-              <span className="text-neutral-700 flex items-center mt-3 font-semibold text-[13px] ">
-                1D
-              </span>
-            </div>
-          </section>
+              </div>
+            </section>
+          </div>
+          <div>
+            <TradeCalculator
+              coinSymbol={detailData[0]?.symbol}
+              coinValue={detailData[0]?.price_usd}
+              nameId={detailData[0]?.nameid}
+            />
+          </div>
         </div>
       )}
 

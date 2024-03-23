@@ -6,12 +6,12 @@ import { useEffect, useState } from "react";
 import { toast } from "../lib/use-toast";
 
 const Profile = () => {
-  const { address } = useAccount();
+  const { address, connector } = useAccount();
+  const wallet = connector?.name;
   const [shouldToast, setShouldToast] = useState(false);
 
   const {
     data: balance,
-    error,
     status,
     isFetching,
   } = useBalance({
@@ -22,7 +22,7 @@ const Profile = () => {
     if (status === "success" && shouldToast) {
       toast({
         variant: "success",
-        description: "Successfully connected to your wallet ✅",
+        description: `Successfully connected to ${wallet} ✅`,
       });
 
       setShouldToast(false);
@@ -35,22 +35,27 @@ const Profile = () => {
     if (status === "error") {
       toast({
         variant: "destructive",
-        title: "Uh oh! Something went wrong.",
+        title: "Something went wrong.",
         description: "There was a problem with your request.",
       });
     }
   }, [status]);
 
-  // if (isFetching) return null;
+  if (isFetching)
+    return (
+      <div>
+        <p className="w-full h-[50vh] flex justify-center items-center font-medium text-neutral-300">
+          Loading Information, please wait...
+        </p>
+      </div>
+    );
 
   return (
     <div>
-      {/* Balance:{balance?.formatted}
-      {JSON.stringify(balance?.symbol)} */}
       {status === "pending" ? (
         <Hero />
       ) : (
-        <HeroLogged balance={balance} address={address} />
+        <HeroLogged balance={balance} address={address} walletName={wallet} />
       )}
       <Collapsible
         title="Top Tokens by Market Capitalization"

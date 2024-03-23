@@ -5,6 +5,7 @@ import CryptoImage from "./crypto-image";
 import { usdFormatter } from "../hooks/usd-formatter";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import InfoTooltip from "./info-tooltip";
 
 const CurrencyList = ({ data }: CurrencyListProps) => {
   const tableData = React.useMemo(() => data, [data]);
@@ -132,15 +133,8 @@ const CurrencyList = ({ data }: CurrencyListProps) => {
         },
         accessor: (row: { id: string }) => {
           return (
-            <div
-              className="w-4 h-4 cursor-pointer -mt-0.5"
-              onClick={() => goToDetails(Number(row.id))}>
-              <Image
-                src={`/icons/info.svg`}
-                alt="details"
-                width={15}
-                height={15}
-              />
+            <div onClick={() => goToDetails(Number(row.id))}>
+              <InfoTooltip content="See details of this coin" link />
             </div>
           );
         },

@@ -8,35 +8,32 @@ const LineChart = (data: { data: string[][] }) => {
     series: {
       0: { color: "#F0B90B" },
     },
-    hAxis: {
-      title: "Time",
-      fontName: "Arial", // Font for the horizontal axis
-      fontSize: 12, // Font size for the horizontal axis
-    },
-    vAxis: {
-      title: "Price",
-      fontName: "Arial", // Font for the vertical axis
-      fontSize: 12, // Font size for the vertical axis
-    },
+
     chart: {
-      title: "Box Office Earnings in First Two Weeks of Opening",
+      title:
+        "Data shown in this graphic is referential since the source is not 100% accurate",
       subtitle: "Prices at left are represented in Dollars (USD)",
     },
   };
 
   return (
     <div className="">
-      {chartData.length > 3 ? (
+      {chartData.length > 1 ? (
         <Chart
-          className=" font-sans font-semibold"
+          className=""
           chartType="Line"
-          width=""
+          width="100%"
           height="300px"
           data={chartData}
           options={options}
         />
       ) : (
-        <div>Theres not enough data to show this graphic</div>
+        <div className="w-full bg-red-400 rounded-sm text-[12px] p-2 items-center ">
+          <p className="-mt-0.5 text-neutral-700">
+            Insufficient Data Available: Chart Cannot Be Generated Due to
+            Limited Data
+          </p>
+        </div>
       )}
     </div>
   );

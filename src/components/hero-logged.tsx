@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { copyToClipboard } from "../hooks/useClipboard";
 
-const HeroLogged = ({ balance, address }: HeroLoggedProps) => {
+const HeroLogged = ({ balance, address, walletName }: HeroLoggedProps) => {
   const [showBalance, setShowBalance] = useState(false);
 
   return (
@@ -11,15 +11,20 @@ const HeroLogged = ({ balance, address }: HeroLoggedProps) => {
       <h1 className="font-bold text-[28px] ">Wallet Overview</h1>
 
       <div className="flex gap-2">
-        <p className="font-semibold flex">Address: {address} </p>
-        <div onClick={() => copyToClipboard(JSON.stringify(address))}>
-          <Image
-            className="mt-0.5 w-5 max-w-5 h-5 max-h-5 cursor-pointer active:w-[19px] active:h-[19px] transition-all "
-            width={16}
-            height={16}
-            alt="show-balance-icon"
-            src={`/icons/clipboard.svg`}
-          />
+        <div className="font-semibold flex flex-col sm:flex-row sm:gap-2">
+          <p>{walletName} Address:</p>
+          <div className="flex">
+            <p className="truncate">{address}</p>
+            <div onClick={() => copyToClipboard(JSON.stringify(address))}>
+              <Image
+                className="mt-0.5 w-5 max-w-5 h-5 max-h-5 cursor-pointer active:w-[19px] active:h-[19px] transition-all "
+                width={16}
+                height={16}
+                alt="show-balance-icon"
+                src={`/icons/clipboard.svg`}
+              />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -48,13 +53,10 @@ const HeroLogged = ({ balance, address }: HeroLoggedProps) => {
               alt="show-balance-icon"
               src={`/icons/coins/eth.svg`}
             />
-            <p>
-              {`${balance?.formatted} ${balance?.symbol}`}
-              {/* <span className="text-[20px] mb-2 ">($0.00 USD)</span> */}
-            </p>
+            <p>{`${balance?.formatted} ${balance?.symbol}`}</p>
           </div>
         ) : (
-          <p className="font-bold text-[28px]">***BALANCE HIDDEN***</p>
+          <p className="font-bold text-[20px]">***BALANCE HIDDEN***</p>
         )}
       </section>
       <section
@@ -70,7 +72,7 @@ const HeroLogged = ({ balance, address }: HeroLoggedProps) => {
               alt="show-balance-icon"
               src={`/icons/secret.svg`}
             />
-            <p className="font-semibold text-[12px] mt-1  text-neutral-500">
+            <p className="font-semibold text-[12px] h-[2rem] mt-0.5  text-neutral-500">
               Your assets are hidden, tap the eye icon to show your assets.
             </p>
           </>
