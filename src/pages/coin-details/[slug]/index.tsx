@@ -67,60 +67,67 @@ const Index = () => {
   }
 
   return (
-    <div className="h-[100%] pt-[72px] mx-8">
-      {!detailIsFetching && !marketIsFetching && hasCoinId && (
-        <div className="flex flex-col md:flex-row w-full md:justify-between">
-          <div>
-            <Head>
-              <title>
-                {detailIsFetching ? "Blockchain App" : detailData[0]?.name}
-              </title>
-            </Head>
+    <div className="flex mx-8 md:mx-0 justify-center items-center">
+      <div className="h-[100%] pt-[72px] flex flex-col w-full md:w-[80%]  ">
+        {!detailIsFetching && !marketIsFetching && hasCoinId && (
+          <div className="flex flex-col md:flex-row w-full md:justify-between ">
+            <div>
+              <Head>
+                <title>
+                  {detailIsFetching ? "Blockchain App" : detailData[0]?.name}
+                </title>
+              </Head>
 
-            <section className="flex gap-3 my-4 flex-col">
-              <div className="flex">
-                <CryptoImage coinName={detailData[0]?.nameid} size="lg" />
-                <p className="flex items-center text-[32px] font-bold text-neutral-800 mx-2">
-                  {detailData[0]?.name} Price
-                  <span className="mx-2 pt-2 text-[20px] text-neutral-500 font-semibold">
-                    ({detailData[0]?.symbol})
+              <section className="flex gap-3 my-4 flex-col">
+                <div className="flex ">
+                  <CryptoImage coinName={detailData[0]?.nameid} size="lg" />
+                  <div className="flex items-center text-[26px] md:text-[32px] font-bold text-neutral-800 mx-2">
+                    <div className="flex">
+                      <p>
+                        {" "}
+                        {detailData[0]?.name} Price
+                        <span className="mx-2 pt-3 text-[20px] text-neutral-500 font-semibold">
+                          ({detailData[0]?.symbol})
+                        </span>{" "}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex">
+                  <h1 className="text-3xl font-bold text-neutral-800">
+                    {usdFormatter(detailData[0]?.price_usd)}
+                    <span
+                      className={`mx-2 ${
+                        detailData[0].percent_change_24h > 0
+                          ? `text-emerald-400 text-xl`
+                          : `text-red-400 text-xl`
+                      }`}>
+                      {detailData[0]?.percent_change_24h}%
+                    </span>
+                  </h1>
+                  <span className="text-neutral-700 flex items-center mt-3 font-semibold text-[13px] ">
+                    1D
                   </span>
-                </p>
-              </div>
-              <div className="flex">
-                <h1 className="text-3xl font-bold text-neutral-800">
-                  {usdFormatter(detailData[0]?.price_usd)}
-                  <span
-                    className={`mx-2 ${
-                      detailData[0].percent_change_24h > 0
-                        ? `text-emerald-400 text-xl`
-                        : `text-red-400 text-xl`
-                    }`}>
-                    {detailData[0]?.percent_change_24h}%
-                  </span>
-                </h1>
-                <span className="text-neutral-700 flex items-center mt-3 font-semibold text-[13px] ">
-                  1D
-                </span>
-              </div>
-            </section>
+                </div>
+              </section>
+            </div>
+            <div>
+              <TradeCalculator
+                coinSymbol={detailData[0]?.symbol}
+                coinValue={detailData[0]?.price_usd}
+                nameId={detailData[0]?.nameid}
+              />
+            </div>
           </div>
-          <div>
-            <TradeCalculator
-              coinSymbol={detailData[0]?.symbol}
-              coinValue={detailData[0]?.price_usd}
-              nameId={detailData[0]?.nameid}
-            />
-          </div>
-        </div>
-      )}
+        )}
 
-      {chartData && detailData && (
-        <section className="flex flex-col">
-          <LineChart data={chartData} />
-          <StatisticsContainer data={detailData[0]} />
-        </section>
-      )}
+        {chartData && detailData && (
+          <section className="flex flex-col">
+            <LineChart data={chartData} />
+            <StatisticsContainer data={detailData[0]} />
+          </section>
+        )}
+      </div>
     </div>
   );
 };

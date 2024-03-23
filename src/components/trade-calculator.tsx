@@ -28,7 +28,7 @@ const TradeCalculator = ({
   };
 
   return (
-    <div className="  my-6  w-full md:w-[25rem]">
+    <div className="  my-6  w-full md:w-[20rem] lg:w-[25rem] xl:w-[30rem]">
       <p
         className="text-xl my-2 underline-offset-8 decoration-[#F0B90B] decoration-4 
       font-medium underline text-neutral-700">
