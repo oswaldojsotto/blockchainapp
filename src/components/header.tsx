@@ -13,13 +13,10 @@ import {
 const Header = () => {
   const router = useRouter();
   const { connector } = useAccount();
+  const walletIcon = connector?.icon;
   const backToMain = () => {
     router.push("/");
   };
-
-  const walletIcon = connector?.icon;
-
-  console.log(walletIcon);
 
   return (
     <main className="fixed top-0 flex justify-between w-full gap-4 bg-white shadow-md -200 z-10 h-[70px]">
