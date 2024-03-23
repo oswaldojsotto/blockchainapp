@@ -6,11 +6,6 @@ import {
 } from "@/src/components/ui/tooltip";
 import Image from "next/image";
 
-interface InfoTooltip {
-  content: string;
-  link?: boolean;
-}
-
 const InfoTooltip = ({ content, link = false }: InfoTooltip) => {
   return (
     <div>

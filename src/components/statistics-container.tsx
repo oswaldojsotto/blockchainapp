@@ -1,11 +1,6 @@
 import React from "react";
-import { usdFormatter } from "../hooks/usd-formatter";
-import InfoTooltip from "./info-tooltip";
-import Statistic from "./statistic";
-
-interface StatisticsContainerProps {
-  data: RowProps;
-}
+import { usdFormatter } from "@/src/hooks/usd-formatter";
+import Statistic from "@/src/components/statistic";
 
 const StatisticsContainer = ({ data }: StatisticsContainerProps) => {
   const information = [

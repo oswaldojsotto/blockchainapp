@@ -4,14 +4,8 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "../components/ui/accordion";
+} from "@/src/components/ui/accordion";
 import { AccordionHeader } from "@radix-ui/react-accordion";
-
-interface CollapsibleProps {
-  title: string;
-  brief?: string;
-  description: string;
-}
 
 const Collapsible = ({ title, description, brief }: CollapsibleProps) => {
   return (
