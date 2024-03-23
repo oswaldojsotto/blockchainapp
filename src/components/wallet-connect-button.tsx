@@ -53,7 +53,7 @@ export const WalletConnectButton = () => {
                 );
               }
               return (
-                <div style={{ display: "flex", gap: 12 }}>
+                <div className="flex gap-2 flex-col sm:flex-row">
                   <Button
                     type="button"
                     onClick={openChainModal}
