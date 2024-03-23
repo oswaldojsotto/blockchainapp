@@ -6,10 +6,11 @@ import { transformDataToArray } from "@/src/hooks/transform-chart-data";
 import { getCryptoDetails } from "@/src/services/get-details";
 import { getMarketPrices } from "@/src/services/get-market-prices";
 import { filterAverage } from "@/src/hooks/filter-average";
+import { toast } from "@/src/lib/use-toast";
+import { usdFormatter } from "@/src/hooks/usd-formatter";
 import Head from "next/head";
 import CryptoImage from "@/src/components/crypto-image";
 import LineChart from "@/src/components/line-chart";
-import { usdFormatter } from "@/src/hooks/usd-formatter";
 import StatisticsContainer from "@/src/components/statistics-container";
 import TradeCalculator from "@/src/components/trade-calculator";
 
@@ -22,9 +23,7 @@ const Index = () => {
   const {
     data: detailData,
     error: detailError,
-    isLoading: detailIsLoading,
     isFetching: detailIsFetching,
-    // refetch: detailRefresh,
   } = useQuery({
     queryKey: ["cryptoDetail"],
     queryFn: () => getCryptoDetails(Number(coinId)),
@@ -34,9 +33,7 @@ const Index = () => {
   const {
     data: marketData,
     error: marketError,
-    isLoading: marketIsLoading,
     isFetching: marketIsFetching,
-    // refetch: marketRefresh,
   } = useQuery({
     queryKey: ["cryptoMarket"],
     queryFn: () => getMarketPrices(Number(coinId)),
@@ -58,14 +55,11 @@ const Index = () => {
   }, [marketData, detailData]);
 
   if (detailError || marketError) {
-    return (
-      <div>
-        Theres has been an error while loading data try{" "}
-        <span>
-          <button className="bg-yellow-400 text-neutral-700">REFRESH</button>
-        </span>
-      </div>
-    );
+    toast({
+      variant: "destructive",
+      title: "Something went wrong.",
+      description: "There was a problem with your request.",
+    });
   }
 
   if (marketIsFetching || detailIsFetching) {
@@ -73,12 +67,14 @@ const Index = () => {
   }
 
   return (
-    <div className="h-[100vh] pt-[72px] mx-8">
+    <div className="h-[100%] pt-[72px] mx-8">
       {!detailIsFetching && !marketIsFetching && hasCoinId && (
         <div className="flex flex-col md:flex-row w-full md:justify-between">
           <div>
             <Head>
-              {!detailIsFetching && <title>{detailData[0]?.name}</title>}
+              <title>
+                {detailIsFetching ? "Blockchain App" : detailData[0]?.name}
+              </title>
             </Head>
 
             <section className="flex gap-3 my-4 flex-col">

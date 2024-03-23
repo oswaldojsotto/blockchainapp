@@ -51,7 +51,7 @@ const Profile = () => {
     );
 
   return (
-    <div>
+    <div className="flex flex-col justify-center">
       {status === "pending" ? (
         <Hero />
       ) : (
