@@ -14,7 +14,7 @@ const Footer = () => {
               Oswaldo Sotto,
             </a>
           </span>{" "}
-          Source code is in{" "}
+          source code is in{" "}
           <span className="underline underline-offset-4">
             <a target="_blank" href={github}>
               Github

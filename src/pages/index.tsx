@@ -1,3 +1,4 @@
+"use client";
 import type { NextPage } from "next";
 import { getCryptoList } from "@/src/services/get-crypto-list";
 import { useQuery } from "@tanstack/react-query";
