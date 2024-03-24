@@ -145,7 +145,7 @@ const CurrencyList = ({ data }: CurrencyListProps) => {
 
   return (
     <div className="flex justify-center w-full ">
-      <div className="flex flex-col w-full lg:w-[90%] xl:w-[75%] ">
+      <div className="flex w-full lg:max-w-4xl ">
         <Table data={tableData} columns={columns} />
       </div>
     </div>

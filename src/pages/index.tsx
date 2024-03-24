@@ -73,7 +73,7 @@ const Home: NextPage = () => {
   }, [status]);
 
   return (
-    <main className="mx-8 pt-16">
+    <main className="mx-8 pt-16 lg:mx-0">
       <Head>
         <title>Blockchain App</title>
         <meta content="Created by Oswaldo" name="description" />

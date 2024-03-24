@@ -16,7 +16,6 @@ export const ethereumSlice = createSlice({
       const { ethereums, ethereumPriceUsd } = action.payload;
       const valueUsd = ethereums * ethereumPriceUsd;
       state.usd = valueUsd;
-      console.log('qlq');
     },
   },
 });
