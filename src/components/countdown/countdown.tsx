@@ -17,7 +17,7 @@ const ShowCounter = ({ days, hours, minutes, seconds }: ShowCounterProps) => {
     <div className="w-auto">
       <div className="w-auto flex text-[24px] font-bold ">
         <DateTimeDisplay value={days} type={"Days"} isDanger={days <= 3} />
-        <p>:</p>
+        <p className="">:</p>
         <DateTimeDisplay value={hours} type={"Hours"} isDanger={false} />
         <p>:</p>
         <DateTimeDisplay value={minutes} type={"Mins"} isDanger={false} />
