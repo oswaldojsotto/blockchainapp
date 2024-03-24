@@ -37,9 +37,6 @@ export const WalletConnectButton = () => {
                     variant="custom">
                     Connect Wallet
                   </Button>
-                  //   <button onClick={openConnectModal} type="button">
-                  //     Connect Wallet
-                  //   </button>
                 );
               }
               if (chain.unsupported) {
@@ -84,10 +81,6 @@ export const WalletConnectButton = () => {
                     onClick={openAccountModal}
                     type="button"
                     variant="logout">
-                    {/* {account.displayName} */}
-                    {/* {account.displayBalance
-                      ? ` (${account.displayBalance})`
-                      : ""} */}
                     Disconnect Wallet
                   </Button>
                 </div>

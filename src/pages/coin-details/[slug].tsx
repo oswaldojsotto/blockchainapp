@@ -13,12 +13,15 @@ import CryptoImage from "@/src/components/crypto-image";
 import LineChart from "@/src/components/line-chart";
 import StatisticsContainer from "@/src/components/statistics-container";
 import TradeCalculator from "@/src/components/trade-calculator";
+import ErrorPage from "../404";
 
 const Index = () => {
   const router = useRouter();
   const [hasCoinId, setHasCoinId] = useState<boolean>(false);
   const [chartData, setChartData] = useState<string[][]>();
-  const coinId = router.query.slug;
+  const coinId = Number(router.query.slug);
+
+  const isValidNumber = !isNaN(coinId) && Number.isInteger(Number(coinId));
 
   const {
     data: detailData,
@@ -26,7 +29,7 @@ const Index = () => {
     isFetching: detailIsFetching,
   } = useQuery({
     queryKey: ["cryptoDetail"],
-    queryFn: () => getCryptoDetails(Number(coinId)),
+    queryFn: () => getCryptoDetails(coinId),
     enabled: hasCoinId,
   });
 
@@ -36,7 +39,7 @@ const Index = () => {
     isFetching: marketIsFetching,
   } = useQuery({
     queryKey: ["cryptoMarket"],
-    queryFn: () => getMarketPrices(Number(coinId)),
+    queryFn: () => getMarketPrices(coinId),
     enabled: hasCoinId,
   });
 
@@ -64,6 +67,10 @@ const Index = () => {
 
   if (marketIsFetching || detailIsFetching) {
     return <p>loading</p>;
+  }
+
+  if (!isValidNumber) {
+    return <ErrorPage />;
   }
 
   return (

@@ -116,7 +116,7 @@ const CurrencyList = ({ data }: CurrencyListProps) => {
           );
         },
         accessor: (row: RowProps) => {
-          const value = usdFormatter(row.market_cap_usd);
+          const value = usdFormatter(Number(row.market_cap_usd));
           return (
             <div className={`font-semibold text-neutral-600`}>{value}</div>
           );

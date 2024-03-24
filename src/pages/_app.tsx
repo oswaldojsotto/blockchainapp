@@ -15,6 +15,8 @@ import {
   sepolia,
   zora,
 } from "wagmi/chains";
+import StoreProvider from "@/src/store/StoreProvider";
+import Footer from "../components/footer";
 
 const config = getDefaultConfig({
   appName: "Crypto",
@@ -35,19 +37,22 @@ const client = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={client}>
-        <RainbowKitProvider
-          modalSize="compact"
-          coolMode
-          initialChain={mainnet}
-          locale="en-US">
-          <Toaster />
-          <Header />
-          <Component {...pageProps} />
-        </RainbowKitProvider>
-      </QueryClientProvider>
-    </WagmiProvider>
+    <StoreProvider>
+      <WagmiProvider config={config}>
+        <QueryClientProvider client={client}>
+          <RainbowKitProvider
+            modalSize="compact"
+            coolMode
+            initialChain={mainnet}
+            locale="en-US">
+            <Toaster />
+            <Header />
+            <Component {...pageProps} />
+            <Footer />
+          </RainbowKitProvider>
+        </QueryClientProvider>
+      </WagmiProvider>
+    </StoreProvider>
   );
 }
 

@@ -1,23 +1,31 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import { copyToClipboard } from "../hooks/useClipboard";
+import { copyToClipboard } from "@/src/hooks/useClipboard";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { usdFormatter } from "../hooks/usd-formatter";
 
 const HeroLogged = ({ balance, address, walletName }: HeroLoggedProps) => {
   const [showBalance, setShowBalance] = useState(false);
+  const usd = useSelector((state: RootState) => state.ethereumPrice.usd);
 
   return (
-    <div className="my-12 text-neutral-700">
+    <div className="my-12 text-neutral-600 flex flex-col">
       <h1 className="font-bold text-[28px] ">Wallet Overview</h1>
 
-      <div className="flex gap-2">
+      <section className="flex gap-2">
         <div className="font-semibold flex flex-col sm:flex-row sm:gap-2">
-          <p>{walletName} Address:</p>
+          <p className="text-[14px] font-semibold sm:text-[16px]">
+            {walletName} Address:
+          </p>
           <div className="flex">
-            <p className="truncate">{address}</p>
+            <p className="text-[14px] font-semibold sm:text-[16px]">
+              {address}
+            </p>
             <div onClick={() => copyToClipboard(JSON.stringify(address))}>
               <Image
-                className="mt-0.5 w-5 max-w-5 h-5 max-h-5 cursor-pointer active:w-[19px] active:h-[19px] transition-all "
+                className=" sm:mt-0.5 w-5 max-w-5 h-5 max-h-5 cursor-pointer  transition-all "
                 width={16}
                 height={16}
                 alt="show-balance-icon"
@@ -26,7 +34,7 @@ const HeroLogged = ({ balance, address, walletName }: HeroLoggedProps) => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       <section className="flex  font-semibold text-[14px] my-4">
         <p>Estimated Balance</p>
@@ -54,13 +62,18 @@ const HeroLogged = ({ balance, address, walletName }: HeroLoggedProps) => {
               src={`/icons/coins/eth.svg`}
             />
             <p>{`${balance?.formatted} ${balance?.symbol}`}</p>
+            {usd !== undefined && (
+              <p className=" font-semibold text-[16px] text-neutral-400 flex items-center mt-1">{`(USD ${usdFormatter(
+                usd
+              )})`}</p>
+            )}
           </div>
         ) : (
           <p className="font-bold text-[20px]">***BALANCE HIDDEN***</p>
         )}
       </section>
       <section
-        className={`w-full h-6  flex align-center rounded-md my-2 transition-all  ${
+        className={`w-full h-auto  flex align-center rounded-md my-2 transition-all  ${
           !showBalance ? `bg-yellow-100` : `bg-transparent`
         }`}>
         {showBalance ? null : (
@@ -72,7 +85,7 @@ const HeroLogged = ({ balance, address, walletName }: HeroLoggedProps) => {
               alt="show-balance-icon"
               src={`/icons/secret.svg`}
             />
-            <p className="font-semibold text-[12px] h-[2rem] mt-0.5  text-neutral-500">
+            <p className="font-semibold text-[10px] sm:text-[12px]  mt-0.5   text-neutral-500">
               Your assets are hidden, tap the eye icon to show your assets.
             </p>
           </>
