@@ -1,11 +1,10 @@
 "use client";
 import React, { useMemo } from "react";
-import Table from "./table";
-import CryptoImage from "./crypto-image";
-import { usdFormatter } from "../hooks/usd-formatter";
+import Table from "@/src/components/table";
+import CryptoImage from "@/src/components/crypto-image";
+import { usdFormatter } from "@/src/hooks/usd-formatter";
 import { useRouter } from "next/router";
-import Image from "next/image";
-import InfoTooltip from "./info-tooltip";
+import InfoTooltip from "@/src/components/info-tooltip";
 
 const CurrencyList = ({ data }: CurrencyListProps) => {
   const tableData = React.useMemo(() => data, [data]);

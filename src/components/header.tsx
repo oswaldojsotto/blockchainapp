@@ -8,7 +8,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "@/src/components/ui/dropdown-menu";
 
 const Header = () => {
   const router = useRouter();
@@ -19,13 +19,13 @@ const Header = () => {
   };
 
   return (
-    <main className="bg-yellow-100 z-10 flex fixed w-full justify-center border-b-2 h-[72px] ">
+    <main className="bg-white z-10 flex fixed w-full justify-center border-b-2 h-[72px] ">
       <div className="flex justify-between w-full lg:max-w-4xl mx-8 lg-mx-0">
         <div
           className="flex items-center  cursor-pointer tracking-tighter b "
           onClick={() => backToMain()}>
-          <h1 className="font-bold text-2xl   text-[#F0B90B] min-w-[6rem]">
-            BE<span className="text-neutral-700">-</span>TRADE
+          <h1 className="font-bold text-2xl text-[#F0B90B] drop-shadow-xl min-w-[6rem]">
+            BE<span className="text-neutral-700 mt-[4px]">-</span>TRADE
           </h1>
         </div>
 

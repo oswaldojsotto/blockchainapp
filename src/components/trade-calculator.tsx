@@ -1,14 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { usdFormatter } from "../hooks/usd-formatter";
-import CryptoImage from "./crypto-image";
-import { Button } from "./ui/button";
-
-interface TradeCalculatorProps {
-  coinSymbol: string;
-  coinValue: number;
-  nameId: string;
-}
+import { usdFormatter } from "@/src/hooks/usd-formatter";
+import CryptoImage from "@/src/components/crypto-image";
+import { Button } from "@/src/components/ui/button";
 
 const TradeCalculator = ({
   coinSymbol,
@@ -22,7 +16,6 @@ const TradeCalculator = ({
     const inputValue = e.target.value;
     setInputNumber(inputValue);
 
-    // Calculate the result
     const multipliedResult = coinValue * Number(inputValue);
     setResult(multipliedResult);
   };

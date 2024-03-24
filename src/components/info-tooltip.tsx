@@ -1,10 +1,10 @@
+import Image from "next/image";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/src/components/ui/tooltip";
-import Image from "next/image";
 
 const InfoTooltip = ({ content, link = false }: InfoTooltip) => {
   return (

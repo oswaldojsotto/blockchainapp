@@ -6,11 +6,6 @@ import {
   AccordionTrigger,
 } from "../components/ui/accordion";
 
-interface CollapsibleProps {
-  title: string;
-  description: string;
-}
-
 const Collapsible = ({ title, description }: CollapsibleProps) => {
   return (
     <div className="flex justify-center w-full outline-none">

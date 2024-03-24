@@ -24,7 +24,7 @@ export const filterAverage = (price: number,  marketData: MarketDataProps[] ) =>
    const dataSortedByTime = sortArrayByTime(simplifiedData);
    
    // Sometimes the data brings predictions on the last 2 elements of the list, we slice them
-   // It will not be real time sometimes but the graphics will be more accurate
+   // It will not be real time data but the graphics will be more accurate
    return dataSortedByTime.slice(0, -2);
   
   }

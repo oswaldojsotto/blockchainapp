@@ -1,4 +1,4 @@
-import { toast } from "../lib/use-toast";
+import { toast } from "@/src/lib/use-toast";
 
 export function copyToClipboard(hexValue: string) {
     const tempInput = document.createElement("input");
