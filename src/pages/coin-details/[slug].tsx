@@ -74,8 +74,8 @@ const Index = () => {
   }
 
   return (
-    <div className="flex mx-8 md:mx-0 justify-center items-center">
-      <div className="h-[100%] pt-[72px] flex flex-col w-full md:w-[80%]  ">
+    <div className="flex mx-8  justify-center items-center">
+      <div className="h-[100%] pt-[72px] flex flex-col w-full sm:max-w-4xl max-w-4xl  ">
         {!detailIsFetching && !marketIsFetching && hasCoinId && (
           <div className="flex flex-col md:flex-row w-full md:justify-between ">
             <div>
