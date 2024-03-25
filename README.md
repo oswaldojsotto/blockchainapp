@@ -1,3 +1,28 @@
+-Welcome... To run this project locally you need to open a terminal and follow
+the steps:
+
+1- clone the repository:  
+git clone https://github.com/oswaldojsotto/blockchainapp.git
+
+2- enter this command after cloning the repo: cd blockchainapp
+
+3- run "npm install" to install all dependencies of the project and wait for
+them to install
+
+4- open the folder of the project with your favorite code editor and run this
+command: "npm run dev"
+
+5- go to the following url http://localhost:3000/ in your browser
+
+- If you have some trouble running the app locally you can contact me
+
+- The project is also deployed in Vercel: follow this link:
+  https://blockchainapp-eta.vercel.app/.
+
+  Hope you like my work... :)
+
+  Additional Notes:
+
 -Installed Next JS v14 for development enviroment framework with typescript and
 tailwind css support. Also has built in React-router to handle page routing.
 
