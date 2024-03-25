@@ -15,16 +15,18 @@ const HeroLogged = ({ balance, address, walletName }: HeroLoggedProps) => {
       <div className=" w-full lg:max-w-4xl">
         <h1 className="font-bold text-[28px] mt-8 ">Wallet Overview</h1>
 
-        <section className="flex gap-2">
+        <section className="flex gap-2 ">
           <div className="font-semibold flex flex-col sm:flex-row sm:gap-2">
             <p className="text-[14px] font-semibold sm:text-[16px]">
               {walletName} Address:
             </p>
-            <div className="flex">
+            <div className="flex ">
               <p className="text-[14px] font-semibold sm:text-[16px]">
                 {address}
               </p>
-              <div onClick={() => copyToClipboard(JSON.stringify(address))}>
+              <div
+                className=""
+                onClick={() => copyToClipboard(JSON.stringify(address))}>
                 <Image
                   className=" sm:mt-0.5 w-5 max-w-5 h-5 max-h-5 cursor-pointer  transition-all "
                   width={16}
@@ -37,10 +39,10 @@ const HeroLogged = ({ balance, address, walletName }: HeroLoggedProps) => {
           </div>
         </section>
 
-        <section className="flex  font-semibold text-[14px] my-4">
+        <section className="flex  font-semibold text-[14px] my-4 ">
           <p>Estimated Balance</p>
           <div
-            className=" mt-[1px] mx-2 cursor-pointer select-none"
+            className=" mt-[1px] mx-2 cursor-pointer select-none "
             onClick={() => setShowBalance(!showBalance)}>
             <Image
               className="w-5 max-w-5 h-5 max-h-5"
@@ -55,7 +57,7 @@ const HeroLogged = ({ balance, address, walletName }: HeroLoggedProps) => {
         </section>
         <section>
           {showBalance ? (
-            <div className="font-bold text-[28px] flex gap-4 -mb-[3px]">
+            <div className="font-bold text-[28px] block gap-4 -mb-[3px] bg-[#e4e4e4] w-auto p-3 rounded-xl ">
               <Image
                 width={28}
                 height={28}
