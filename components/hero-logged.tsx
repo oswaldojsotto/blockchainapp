@@ -57,7 +57,7 @@ const HeroLogged = ({ balance, address, walletName }: HeroLoggedProps) => {
         </section>
         <section>
           {showBalance ? (
-            <div className="font-bold text-[28px] block gap-4 -mb-[3px] bg-[#e4e4e4] w-auto p-3 rounded-xl ">
+            <div className="font-bold text-[28px] block gap-4 -mb-[3px] bg-neutral-200 w-auto p-3 rounded-xl ">
               <Image
                 width={28}
                 height={28}
